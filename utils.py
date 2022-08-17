@@ -8,15 +8,13 @@ def generate_gaussian_clusters(means: np.ndarray,
     :param means: a numpy arrays with the means of the clusters
     :param sigmas: a numpy arrays with the std of the clusters
     :param point_per_cluster: number of classes
-    :return: a single mixture containing all the distribution above
+    :return: a single mixture k * N * d (clusters * No. samples * Dimension)
     """
     cluster = list()
     for mu, sigma in zip(means, sigmas):
         cluster.append(np.random.multivariate_normal(mean=mu,
                                                      cov=sigma,
                                                      size=point_per_cluster))
-    shape = (point_per_cluster * means.shape[0], means.shape[1])
-    cluster = np.array(cluster).reshape(shape)
 
-    return cluster
+    return np.array(cluster)
 
