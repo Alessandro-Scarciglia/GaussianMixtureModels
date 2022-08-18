@@ -39,7 +39,7 @@ class KMModel:
         # Step 2: Update representatives with the closest to the mean value
         for bucket in self.clusters.keys():
             # Look for the closest z to zs
-            distances = np.linalg.norm(self.clusters[bucket] - np.mean(self.clusters[bucket]), axis=1)
+            distances = np.linalg.norm(self.clusters[bucket] - np.mean(self.clusters[bucket], axis=0), axis=1)
             closest_index = np.argmin(distances)
             self.zs[int(bucket)] = self.clusters[bucket][closest_index]
 

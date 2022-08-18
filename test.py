@@ -4,22 +4,22 @@ from GMM import KMModel
 from utils import generate_gaussian_clusters
 import numpy as np
 
-CLUSTERS = 3
+CLUSTERS = 5
 
 
 if __name__ == "__main__":
 
     # Generate three clusters with Gaussian PDF
     #np.random.seed(12321)
-    means = np.random.random((CLUSTERS, 2))*15
-    variances = [2*np.eye(2) for _ in range(CLUSTERS)]
-    points = generate_gaussian_clusters(means, np.sqrt(variances), 150)
+    means = np.random.random((CLUSTERS, 2))*20
+    variances = [30*np.eye(2) for _ in range(CLUSTERS)]
+    points = generate_gaussian_clusters(means, np.sqrt(variances), 100)
 
     # Test the representative choice
     mixture = points.reshape((points.shape[0]*points.shape[1], -1))
     model = KMModel(points=mixture, k=CLUSTERS)
 
-    zs, mix = model.run(500)
+    zs, mix = model.run(100)
 
     for key in mix.keys():
         mix[key] = np.array(mix[key])
@@ -35,6 +35,6 @@ if __name__ == "__main__":
     # Show Truth
     plt.figure(1)
     for k in range(len(points)):
-        plt.scatter(points[k, :, 0], points[k, :, 1])
+        plt.scatter(points[k, :, 0], points[k, :, 1], c='blue')
 
     plt.show()
