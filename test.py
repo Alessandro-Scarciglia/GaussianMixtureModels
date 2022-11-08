@@ -9,7 +9,7 @@ CLUSTERS = 5
 # Main
 if __name__ == "__main__":
 
-    # Generate three clusters with Gaussian PDF: this step is not part of the algorithm but it is necessary to generate
+    # Generate clusters with Gaussian PDF: this step is not part of the algorithm but it is necessary to generate
     # a synthetic set of clusters to test GMMs.
     means = np.random.random((CLUSTERS, 2)) * 30
     variances = [40 * np.eye(2) for _ in range(CLUSTERS)]
