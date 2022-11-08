@@ -33,7 +33,7 @@ class KMModel:
         for point in self.points:
             squared_euclidean_distance = list()
             for z in self.zs:
-                squared_euclidean_distance.append(np.linalg.norm(point - z)**2)
+                squared_euclidean_distance.append(np.linalg.norm(point - z) ** 2)
             self.clusters[str(np.argmin(squared_euclidean_distance))].append(point)
 
         # Step 2: Update representatives with the closest to the mean value
@@ -72,17 +72,20 @@ class EMModel:
     @staticmethod
     def __initialize_means(k, points):
         """Means are initialized by K-means"""
-        return 0
+        # TODO: Implement initialization
+        pass
 
     def __expectation_step(self):
+        # TODO: Implement the E-step
         pass
 
     def __maximization_step(self):
+        # TODO: Implement the M-step
         pass
 
     def run(self, training_set: np.ndarray, num_clusters: int):
         """Initialization of parameters"""
         # Initialization of mixtures probabilities
         pj = self.__initialize_pjs(num_clusters)
-        vars = self.__initialize_vars(num_clusters, training_set)
+        variances = self.__initialize_vars(num_clusters, training_set)
         means = self.__initialize_means(num_clusters, training_set)
